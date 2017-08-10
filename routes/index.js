@@ -5,8 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
 
   console.log(req.query)
-
-  res.json('good')
+  // skip the validation if the request is from wechat
+  res.send(req.query.echostr)
+  // res.json('good')
   //res.render('index', { title: 'Express' });
 });
 
