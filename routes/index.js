@@ -3,7 +3,8 @@ var router = express.Router();
 var sha1 = require('sha1')
 
 var wechatConfig = require('../config/wechat.js')
-
+var Wechat = require('../wechat/Wechat.js')
+var wc = new Wechat({})
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -28,5 +29,11 @@ router.get('/', function(req, res, next) {
     res.send ('wechat server validation failed')
   }
 });
+
+router.post('/', function(req, res, next){
+  console.log(req.body)
+  res.send('post processed')
+})
+
 
 module.exports = router;
