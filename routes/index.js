@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
   console.log(req.query)
   // skip the validation if the request is from wechat
-  res.send(req.query.echostr)
+  //res.send(req.query.echostr)
 
   var token = config.wechat.token
 
