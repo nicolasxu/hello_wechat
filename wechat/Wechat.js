@@ -1,6 +1,12 @@
 const Promise = require('bluebird')
 const rp = require('request-promise')
 const config = require('./config.js')
+const util = require('./wechat_util.js')
+const path = require('path')
+const fs = require('fs')
+// load template
+let replyTemplateStr = fs.readFileSync(path.resolve(__dirname, './replyMsgTemplate.html'), 'utf8')
+
 
 class Wechat {
 
@@ -10,19 +16,22 @@ class Wechat {
 
   }
 
-  verifySource() {
-    console.log('verify source...')
-  }
-
   async setMenu() {
     
     let accessToken = await this.getAccessToken()
 
-   
+
+    /* debug code */
+
+    var ss =    { tousername: [ 'gh_046fe6f599dd' ],
+     fromusername: [ 'oKZlXwJ9DQ8iYrO8xFXsX8Rh1WxM' ],
+     createtime: [ '1502980247' ],
+     msgtype: [ 'text' ],
+     content: [ 'hi' ],
+     msgid: [ '6455251007828436130' ] 
+    } 
+
   }
-
-
-
 
   async getAccessToken() {
     /*
@@ -51,11 +60,31 @@ class Wechat {
     this.expires_in = resultJson.expires_in
     this.access_token_receive_time = new Date().getTime()
     return this.access_token
-
   }
 
+  async handleMsg(rawJson) {
+    let parsedMsg = util.parseMessage(rawJson)
+    console.log('parsedMsg.msgtype: ')
+    console.log(parsedMsg.msgtype)
+    if (!parsedMsg.msgtype) {
+      // no type do norhing
+      return ''
+    }
+    let createTime = new Date().getTime()
+    let result = '<xml>' +
+        '<ToUserName><![CDATA['+ parsedMsg.fromusername +']]></ToUserName>' +
+        '<FromUserName><![CDATA['+ parsedMsg.tousername +']]></FromUserName>' +
+        '<CreateTime>' + createTime + '</CreateTime>' +
+        '<MsgType><![CDATA[text]]></MsgType>' +
+        '<Content><![CDATA[终于等到你，还好我没放弃]]></Content>' +
+      '</xml>'
+    return result
+  }
+
+
+
   static distance() {
-    console.log('static method distance')
+
   }
 }
 

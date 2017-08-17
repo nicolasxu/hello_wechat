@@ -6,7 +6,6 @@ var verifySource = require('../util/verifySource.js')
 var Wechat = require('../wechat/Wechat.js')
 var wc = new Wechat({})
 
-wc.verifySource()
 wc.setMenu()
 
 /* GET home page. */
@@ -14,9 +13,13 @@ router.get('/', verifySource, function(req, res, next) {
 
 });
 
-router.post('/', verifySource, function(req, res, next){
+router.post('/', async function(req, res, next){
   console.log(req.body)
-  res.send('post processed')
+  let xmlResponse = await wc.handleMsg(req.body.xml)
+  console.log('xmlResponse: ')
+  console.log(xmlResponse)
+  res.type('application/xml').send(xmlResponse)
+
 })
 
 
