@@ -48,7 +48,7 @@ module.exports = {
     {
       "name": "Submit Case",
       "type": "view",
-      "url": "https://www.google.com/"
+      "url": "https://104.131.75.185/dist"
     }
   ]
 }

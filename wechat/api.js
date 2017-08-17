@@ -17,8 +17,7 @@ async function deleteMenu(accessToken) {
 
 async function createMenu(accessToken, menu) {
   let url = config.baseUrl + '/menu/create?access_token=' + accessToken
-  console.log('menu to be set:')
-  console.log(menu)
+
   return rp.post(url, {
     body: menu,
     json: true
