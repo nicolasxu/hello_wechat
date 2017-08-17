@@ -76,7 +76,7 @@ class Wechat {
         '<FromUserName><![CDATA['+ parsedMsg.tousername +']]></FromUserName>' +
         '<CreateTime>' + createTime + '</CreateTime>' +
         '<MsgType><![CDATA[text]]></MsgType>' +
-        '<Content><![CDATA[终于等到你，还好我没放弃]]></Content>' +
+        '<Content><![CDATA[终于等到你，还好我没放弃. Finally you are off the beaten path]]></Content>' +
       '</xml>'
     return result
   }
