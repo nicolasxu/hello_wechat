@@ -22,5 +22,15 @@ router.post('/', async function(req, res, next){
 
 })
 
+router.get('/newcase', function(req, res, next) {
+  // html
+  // css
+  // javascript
 
-module.exports = router;
+
+})
+
+
+
+
+module.exports = router

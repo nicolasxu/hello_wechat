@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 var xmlparser = require('express-xml-bodyparser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-
+var caseRoutes = require('./routes/api/case.js')
 var app = express();
 
 // view engine setup
@@ -26,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api', caseRoutes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

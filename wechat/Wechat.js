@@ -4,6 +4,8 @@ const config = require('./config.js')
 const util = require('./wechat_util.js')
 const path = require('path')
 const fs = require('fs')
+const api = require('./api.js')
+const menu = require('./menu.js')
 // load template
 let replyTemplateStr = fs.readFileSync(path.resolve(__dirname, './replyMsgTemplate.html'), 'utf8')
 
@@ -19,18 +21,16 @@ class Wechat {
   async setMenu() {
     
     let accessToken = await this.getAccessToken()
-
-
-    /* debug code */
-
-    var ss =    { tousername: [ 'gh_046fe6f599dd' ],
-     fromusername: [ 'oKZlXwJ9DQ8iYrO8xFXsX8Rh1WxM' ],
-     createtime: [ '1502980247' ],
-     msgtype: [ 'text' ],
-     content: [ 'hi' ],
-     msgid: [ '6455251007828436130' ] 
-    } 
-
+    console.log('accessToken: ' + accessToken)
+    var res1 = await api.menu.delete(accessToken)
+    console.log('delete menu res: ')
+    console.log(res1)
+    var res2 = await api.menu.create(accessToken, menu)
+    console.log('create menu res: ')
+    console.log(res2)
+    let menuBack = await api.menu.get(accessToken)
+    console.log('set menu should be done...')
+    console.log(menuBack)
   }
 
   async getAccessToken() {
@@ -55,7 +55,7 @@ class Wechat {
       'grant_type=client_credential&appid=' + config.appID +
       '&secret=' + config.appSecret)
     let resultJson = JSON.parse(result)
-    console.log('result of token request:', result)
+    
     this.access_token = resultJson.access_token
     this.expires_in = resultJson.expires_in
     this.access_token_receive_time = new Date().getTime()
