@@ -13,7 +13,7 @@ router.get('/', verifySource, function(req, res, next) {
 
 });
 
-router.post('/', async function(req, res, next){
+router.post('/', verifySource, async function(req, res, next){
   console.log(req.body)
   let xmlResponse = await wc.handleMsg(req.body.xml)
   console.log('xmlResponse: ')
