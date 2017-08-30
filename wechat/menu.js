@@ -46,7 +46,7 @@ module.exports = {
             {
                 "name": "Blog博客", 
                 "type": "view", 
-                "key": "http://www.meihengyisheng.com/post-list-page/"
+                "url": "http://www.meihengyisheng.com/post-list-page/"
             }            
         ]
     }, 
