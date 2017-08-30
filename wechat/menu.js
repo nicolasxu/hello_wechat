@@ -42,7 +42,12 @@ module.exports = {
                 "name": "发送位置", 
                 "type": "location_select", 
                 "key": "rselfmenu_2_0"
-            }
+            }, 
+            {
+                "name": "Blog博客", 
+                "type": "view", 
+                "key": "http://www.meihengyisheng.com/post-list-page/"
+            }            
         ]
     }, 
     {
